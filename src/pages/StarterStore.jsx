@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Items } from '../components';
+import { Context } from '../context';
 import logo from '../static/assets/logo.svg';
 import s from './StarterStore.module.css';
-import { Context } from '../context';
 
 export const StarterStore = () => {
   const { loading } = useContext(Context);

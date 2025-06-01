@@ -1,8 +1,7 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import s from './Navbar.module.css';
+import { Link, useLocation } from 'react-router-dom';
 import { Context } from '../../context';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import s from './Navbar.module.css';
 
 export const Navbar = () => {
   const { totalItems, isAuth, setIsAuth } = useContext(Context);
@@ -32,10 +31,7 @@ export const Navbar = () => {
 
         <div className={s.navbarLeftSide}>
           {isAuth ? (
-            <button
-              onClick={handleLogOut}>
-              Log Out
-            </button>
+            <button onClick={handleLogOut}>Log Out</button>
           ) : (
             <>
               <Link

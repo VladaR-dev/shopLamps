@@ -102,13 +102,3 @@ export const PageOfProducts = () => {
   );
 };
 
-// setLamps((prevLamps) =>
-//   prevLamps.map((lampItem) =>
-//     lampItem.id === goodId
-//       ? {
-//           ...lampItem,
-//           total: lampItem.total - quantity,
-//         }
-//       : lampItem
-//   )
-// );

@@ -1,10 +1,10 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { Cart, SignIn, SignUp, StarterStore, PageOfProducts } from './pages';
 import { Navbar } from './components';
 import { Context } from './context';
 import { useInitApp } from './hooks';
 import './App.css';
-import { ToastContainer } from 'react-toastify';
 
 function App() {
   const state = useInitApp();

@@ -26,7 +26,7 @@ export const Item = ({ lamp }) => {
           item.id === lamp.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
-
+      
       // когда товара нет
       if (!existenceItem) {
         setTotalItems((prevTotal) => prevTotal + 1);
