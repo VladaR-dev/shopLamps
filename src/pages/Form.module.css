@@ -1,0 +1,13 @@
+div.pageForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  margin: 0 auto;
+  padding-top: 40px;
+  width: 800px;
+}
+
+div.pageForm h2 {
+  font-size: 30px;
+}

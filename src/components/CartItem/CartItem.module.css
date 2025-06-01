@@ -1,0 +1,51 @@
+.cartItem {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.cartItem img {
+  width: 480px;
+  background-color: #f2f2f2;
+}
+
+.rightSideCartItem {
+  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.infoCart {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nameCart {
+  color: #507dc5;
+  font-size: 34px;
+}
+
+.quntityPriceCart {
+  color: gray;
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.someMoreInfo {
+  font-size: 20px;
+}
+
+.cartItem svg {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  transition: 500ms ease;
+}
+
+.cartItem svg:hover {
+  color: rgb(189, 36, 9);
+}

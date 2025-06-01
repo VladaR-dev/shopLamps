@@ -1,0 +1,71 @@
+.item {
+  border: 1px solid #e2e2e2;
+}
+
+.itemImg {
+  width: 508px;
+  height: auto;
+  overflow: hidden;
+}
+
+div.item img {
+  cursor: pointer;
+  object-position: center;
+  width: 100%;
+  height: auto;
+  background-color: #f2f2f2;
+  transition: transform 500ms ease;
+}
+
+div.item img:hover {
+  transform: scale(1.05);
+}
+
+div.itemText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 20px 20px;
+}
+
+div.itemRightSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+div.itemRightSide svg {
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #fff;
+  background-color: #ca4028;
+  transition: 500ms ease;
+  border: 1px solid #ca4028;
+}
+
+div.itemRightSide svg:hover {
+  color: #fff;
+  background-color: #71a774;
+  border: 1px solid #71a774;
+}
+
+div.itemRightSide svg.disabled {
+  cursor: default;
+  color: #424242;
+  background-color: #bbbbbb;
+  border: 1px solid #bbbbbb;
+}
+
+p.itemName {
+  font-weight: bold;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

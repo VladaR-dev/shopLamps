@@ -1,0 +1,38 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid #d4d4d4;
+  border-radius: 15px;
+  padding: 30px;
+  width: 100%;
+}
+
+.form button {
+  cursor: pointer;
+  width: 120px;
+  font-size: 16px;
+  border: 1px solid #525252;
+  border-radius: 5px;
+  background-color: #f47025;
+  color: #fff;
+  padding: 10px 0;
+  transition: 500ms ease;
+}
+
+.form button:hover {
+  background-color: #ca4a00;
+}
+
+form div.passwordContainer {
+  position: relative;
+}
+
+.passwordContainer .eyePassword svg {
+  position: absolute;
+  top: 32px;
+  right: 15px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}

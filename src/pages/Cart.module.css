@@ -1,0 +1,39 @@
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1280px;
+  gap: 40px;
+}
+
+.subTotal {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #adadad;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.count {
+  font-size: 24px;
+}
+
+.subTotal button {
+  cursor: default;
+  background-color: #000;
+  border: 1px solid#000;
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 5px;
+  font-size: 20px;
+  transition: 500ms ease;
+}
+
+.btnActive:hover {
+  cursor: pointer;
+  background-color: #71a774;
+  color: #ffffff;
+  border: 1px solid#71a774;
+}

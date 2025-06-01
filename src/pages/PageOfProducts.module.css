@@ -1,0 +1,90 @@
+.pageOfGoodContainer {
+  width: 1280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.fieldAdd {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.fieldAdd img {
+  width: 600px;
+}
+
+.filedAddRightSide {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fieldAddName {
+  font-size: 30px;
+}
+
+.fieldAddPrice {
+  font-size: 24px;
+  font-weight: 100;
+}
+
+.fieldAddTotal {
+  background-color: #e8e8e8;
+  font-size: 20px;
+  width: 150px;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 5px;
+  color: #616161;
+}
+
+.inputField {
+  height: 50px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 20px;
+}
+
+.inputField input {
+  height: 100%;
+  border: 1px solid #5e5e5e;
+  width: 258px;
+  padding: 5px;
+  outline: none;
+  font-size: 20px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  cursor: pointer;
+  background-color: #f76e23;
+  color: #fff;
+  height: 100%;
+  border: 1px solid #5e5e5e;
+}
+
+.disabled {
+  cursor: default;
+  background-color: #5e5e5e;
+  color: #fff;
+  border: 1px solid #5e5e5e;
+}
+
+.fieldInfo {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-size: 30px;
+  width: 100%;
+}

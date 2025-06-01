@@ -1,0 +1,114 @@
+import { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { Context } from '../context';
+import s from './PageOfProducts.module.css';
+
+export const PageOfProducts = () => {
+  const params = useParams();
+
+  const [valueInp, setValueInp] = useState('');
+
+  const { lamps, setTotalItems, setCartItems, cartItems, loading } =
+    useContext(Context);
+  const { goodId } = params;
+
+  const lamp = lamps.find((lamp) => lamp.id === goodId);
+
+  const isInpValid = (input) => {
+    const numberInput = Number(input);
+    return !isNaN(numberInput) && numberInput > 0 && numberInput <= lamp.total;
+  };
+
+  const handleChange = (e) => {
+    const inputValue = e.target.value;
+    if (isInpValid(inputValue) || inputValue === '') {
+      setValueInp(inputValue);
+    }
+  };
+
+  const existenceItem = cartItems.find((cartItem) => cartItem.id === goodId);
+
+  const handleChangeButton = () => {
+    if (existenceItem && existenceItem.quantity === lamp.total) return;
+    const quantity = Number(valueInp);
+
+    setCartItems((prevCartItem) => {
+      if (existenceItem && existenceItem.quantity < lamp.total) {
+        setTotalItems((prevTotal) => prevTotal + quantity);
+        return prevCartItem.map((item) =>
+          item.id === goodId
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      }
+
+      if (!existenceItem) {
+        setTotalItems((prevTotal) => prevTotal + quantity);
+        return [
+          ...prevCartItem,
+          {
+            id: goodId,
+            name: lamp.name,
+            price: lamp.price,
+            image: lamp.image,
+            quantity,
+          },
+        ];
+      }
+    });
+    setValueInp('');
+  };
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
+
+  return (
+    <div className={s.pageOfGoodContainer}>
+      <div className={s.fieldAdd}>
+        <img
+          src={lamp.image}
+          alt={lamp.name}
+        />
+        <div className={s.filedAddRightSide}>
+          <div className={s.fieldAddName}>{lamp.name}</div>
+          <div className={s.fieldAddPrice}>{`$${lamp.price}`}</div>
+          <div className={s.fieldAddTotal}>{`Balance: ${lamp.total}`}</div>
+          <div className={s.inputField}>
+            <input
+              type="text"
+              value={valueInp}
+              placeholder="0"
+              onChange={handleChange}
+            />
+            <div
+              type="button"
+              className={
+                existenceItem && existenceItem.quantity === lamp.total
+                  ? `${s.button} ${s.disabled}`
+                  : `${s.button}`
+              }
+              onClick={handleChangeButton}>
+              Add to cart
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={s.fieldInfo}>
+        <p>About this product</p>
+        <p>{lamp.productDescription}</p>
+      </div>
+    </div>
+  );
+};
+
+// setLamps((prevLamps) =>
+//   prevLamps.map((lampItem) =>
+//     lampItem.id === goodId
+//       ? {
+//           ...lampItem,
+//           total: lampItem.total - quantity,
+//         }
+//       : lampItem
+//   )
+// );
