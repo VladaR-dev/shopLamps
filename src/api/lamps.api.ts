@@ -17,6 +17,7 @@ const lamps: ILamp[] = [
     name: 'Breeze of Light',
     image: lamp1,
     price: 243,
+    quantity: 0,
   },
   {
     id: '3c215cc2-8caa-4ade-b9b3-d0569ef2b03c',
@@ -26,6 +27,7 @@ const lamps: ILamp[] = [
     name: 'ArtLux',
     image: lamp2,
     price: 250,
+    quantity: 0,
   },
   {
     id: 'b1435312-e303-45bc-8530-9c19e9debf05',
@@ -35,6 +37,7 @@ const lamps: ILamp[] = [
     name: 'Mirage',
     image: lamp3,
     price: 199,
+    quantity: 0,
   },
   {
     id: '04062b9d-ef3d-4a3d-b456-f927a19ab8c3',
@@ -44,6 +47,7 @@ const lamps: ILamp[] = [
     name: 'Harmony of Light',
     image: lamp4,
     price: 300,
+    quantity: 0,
   },
   {
     id: '88714940-b328-4182-8c65-c7be3dd8378a',
@@ -53,6 +57,7 @@ const lamps: ILamp[] = [
     name: 'Lamp of Inspiration',
     image: lamp5,
     price: 274,
+    quantity: 0,
   },
   {
     id: '022505a9-4ae2-45eb-98d3-9579927bcdfb',
@@ -62,6 +67,7 @@ const lamps: ILamp[] = [
     name: 'Luminaria',
     image: lamp6,
     price: 340,
+    quantity: 0,
   },
   {
     id: '7e8bccbf-47aa-4965-a0b2-2f703c0fb40b',
@@ -71,6 +77,7 @@ const lamps: ILamp[] = [
     name: 'Firefly',
     image: lamp7,
     price: 254,
+    quantity: 0,
   },
   {
     id: '68938987-f396-45ba-b447-5687fca5259d',
@@ -80,9 +87,10 @@ const lamps: ILamp[] = [
     name: 'Star Spark',
     image: lamp8,
     price: 239,
+    quantity: 0,
   },
 ];
 
 export const fetchAll = (): ILamp[] => {
   return lamps;
-}
+};

@@ -1,10 +1,10 @@
 import { FaTrashAlt } from 'react-icons/fa';
 import {  useAppContext } from '../../context';
 import s from './CartItem.module.css';
-import { ICartItem } from '@/types';
+import { ILamp } from '@/types';
 
 interface Props {
-  item: ICartItem;
+  item: ILamp;
 }
 
 export const CartItem = ({ item }: Props) => {

@@ -34,6 +34,41 @@ export const Form = ({ type }: Props) => {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleTypeReg = (
+    coincidenceUser: IUser | undefined,
+    users: IUser[],
+    newUser: IUser
+  ) => {
+    if (coincidenceUser) {
+      toast.error('A user with this email already exists', {
+        autoClose: 2000,
+      });
+      return;
+    } else {
+      users.push(newUser);
+
+      setUsers(users);
+      toast.success('Registration successful! Welcome!', { autoClose: 2000 });
+    }
+  };
+
+  const handleTypeLog = (coincidenceUser: IUser | undefined, allValues: IUser) => {
+    if (!coincidenceUser) {
+      toast.error('User with this email not found', { autoClose: 2000 });
+      return;
+    } else {
+      if (coincidenceUser.password === allValues.password) {
+        toast.success(`Welcome back, ${coincidenceUser.name || 'user'}!`, {
+          autoClose: 2000,
+        });
+        setIsAuth(true);
+        history.push('/');
+      } else {
+        toast.error('Incorrect password', { autoClose: 2000 });
+      }
+    }
+  };
+
   const onSubmit = () => {
     const allValues = watch();
 
@@ -46,34 +81,13 @@ export const Form = ({ type }: Props) => {
     );
 
     if (type === 'reg') {
-      if (coincidenceUser) {
-        toast.error('A user with this email already exists', {
-          autoClose: 2000,
-        });
-        return;
-      } else {
-        users.push(newUser);
-
-        setUsers(users);
-        toast.success('Registration successful! Welcome!', { autoClose: 2000 });
-      }
+      handleTypeReg(coincidenceUser, users, newUser);
     } else {
-      if (!coincidenceUser) {
-        toast.error('User with this email not found', { autoClose: 2000 });
-        return;
-      } else {
-        if (coincidenceUser.password === allValues.password) {
-          toast.success(`Welcome back, ${coincidenceUser.name || 'user'}!`, {
-            autoClose: 2000,
-          });
-          setIsAuth(true);
-          history.push('/');
-        } else {
-          toast.error('Incorrect password', { autoClose: 2000 });
-        }
-      }
+      handleTypeLog(coincidenceUser, allValues);
     }
-
+    console.log('newUser', newUser);
+    console.log('allValues', allValues);
+    console.log('coincidenceUser', coincidenceUser);
     return;
   };
 
@@ -83,7 +97,7 @@ export const Form = ({ type }: Props) => {
         className={s.form}
         onSubmit={handleSubmit(onSubmit)}>
         {type === 'reg' && (
-          <TextField
+          <TextField<IUser>
             label="Name"
             name="name"
             type="text"
@@ -92,7 +106,7 @@ export const Form = ({ type }: Props) => {
             validation={{ required: 'Name is required' }}
           />
         )}
-        <TextField
+        <TextField<IUser>
           label="Email"
           name="email"
           type="text"
@@ -107,7 +121,7 @@ export const Form = ({ type }: Props) => {
           }}
         />
         <div className={s.passwordContainer}>
-          <TextField
+          <TextField<IUser>
             // className={s.password}
             label="Password"
             name="password"

@@ -1,20 +1,29 @@
+import { FieldError, FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import s from './TextField.module.css';
 
-export const TextField = ({
+interface Props<T extends FieldValues> {
+  label: string;
+  type: React.HTMLInputTypeAttribute;
+  name: Path<T>;
+  error?: FieldError;
+  register: UseFormRegister<T>;
+  validation: object;
+}
+
+export const TextField = <T extends FieldValues>({
   label,
   type,
   name,
   error,
   register,
   validation,
-}) => {
+}: Props<T>) => {
   return (
     <div className={s.textField}>
       <label htmlFor={name}>{label}</label>
       <input
         id={name}
         type={type}
-        name={name}
         autoComplete="true"
         {...register(name, validation)}
       />

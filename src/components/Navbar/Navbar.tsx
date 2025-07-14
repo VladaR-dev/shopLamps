@@ -1,15 +1,15 @@
-import { useContext, useState } from 'react';
+import {  useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Context } from '../../context';
+import { useAppContext } from '../../context';
 import s from './Navbar.module.css';
 
 export const Navbar = () => {
-  const { totalItems, isAuth, setIsAuth } = useContext(Context);
+  const { totalItems, isAuth, setIsAuth } = useAppContext();
   const location = useLocation();
 
   const [active, setActive] = useState(location.pathname);
 
-  const handleLinkClick = (path) => {
+  const handleLinkClick = (path: string) => {
     setActive(path);
   };
 

@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import * as lampsApi from '../api';
-import { ILamp, ICartItem, IUser } from '@/types';
+import { ILamp, IUser } from '@/types';
 
 export const useInitApp = () => {
   const [loading, setLoading] = useLocalStorage<boolean>('loading', true);
   const [lamps, setLamps] = useLocalStorage<ILamp[]>('lamps', []);
   const [totalItems, setTotalItems] = useLocalStorage<number>('totalItems', 0);
-  const [cartItems, setCartItems] = useLocalStorage<ICartItem[]>('cartItems', []);
+  const [cartItems, setCartItems] = useLocalStorage<ILamp[]>('cartItems', []);
   const [isAuth, setIsAuth] = useLocalStorage<boolean>('isAuth', false);
   const [users, setUsers] = useLocalStorage<IUser[]>('users', []);
 
@@ -28,10 +28,6 @@ export const useInitApp = () => {
     fetchProducts();
   }, []);
 
-  const handleSetCartItems = (value: ICartItem[] | ((prev: ICartItem[]) => ICartItem[])) => {
-    setCartItems(value);
-  };
-
   return {
     loading,
     lamps,
@@ -42,7 +38,7 @@ export const useInitApp = () => {
     setLamps,
     setTotalItems,
     setIsAuth,
-    setCartItems: handleSetCartItems,
+    setCartItems,
     setUsers,
     users,
   };

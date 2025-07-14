@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppContext } from '../context';
 import s from './PageOfProducts.module.css';
@@ -13,12 +13,16 @@ export const PageOfProducts = () => {
 
   const lamp = lamps.find((lamp) => lamp.id === goodId);
 
-  const isInpValid = (input) => {
+  if (!lamp) {
+    return <div>Товар не найден</div>;
+  }
+
+  const isInpValid = (input: string) => {
     const numberInput = Number(input);
     return !isNaN(numberInput) && numberInput > 0 && numberInput <= lamp.total;
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     if (isInpValid(inputValue) || inputValue === '') {
       setValueInp(inputValue);
@@ -46,14 +50,12 @@ export const PageOfProducts = () => {
         return [
           ...prevCartItem,
           {
-            id: goodId,
-            name: lamp.name,
-            price: lamp.price,
-            image: lamp.image,
+            ...lamp,
             quantity,
           },
         ];
       }
+      return prevCartItem;
     });
     setValueInp('');
   };
@@ -81,7 +83,6 @@ export const PageOfProducts = () => {
               onChange={handleChange}
             />
             <div
-              type="button"
               className={
                 existenceItem && existenceItem.quantity === lamp.total
                   ? `${s.button} ${s.disabled}`

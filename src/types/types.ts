@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface ILamp {
   id: string;
   total: number;
@@ -5,9 +7,6 @@ export interface ILamp {
   name: string;
   image: string;
   price: number;
-}
-
-export interface ICartItem extends ILamp {
   quantity: number;
 }
 
@@ -18,16 +17,16 @@ export interface IUser {
 }
 
 export interface IContext {
-    loading: boolean;
-    lamps: ILamp[];
-    totalItems: number;
-    cartItems: ICartItem[];
-    isAuth: boolean;
-    setLoading: (value: boolean | ((prev: boolean) => boolean)) => void;
-    setLamps: (value: ILamp[] | ((prev: ILamp[]) => ILamp[])) => void;
-    setTotalItems: (value: number | ((prev: number) => number)) => void;
-    setIsAuth: (value: boolean | ((prev: boolean) => boolean)) => void;
-    setCartItems: (value: ICartItem[] | ((prev: ICartItem[]) => ICartItem[])) => void;
-    setUsers: (value: IUser[] | ((prev: IUser[]) => IUser[])) => void;
-    users: IUser[];
+  loading: boolean;
+  lamps: ILamp[];
+  totalItems: number;
+  cartItems: ILamp[];
+  isAuth: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setLamps: Dispatch<SetStateAction<ILamp[]>>;
+  setTotalItems: Dispatch<SetStateAction<number>>;
+  setIsAuth: Dispatch<SetStateAction<boolean>>;
+  setCartItems: Dispatch<SetStateAction<ILamp[]>>
+  setUsers: Dispatch<SetStateAction<IUser[]>>;
+  users: IUser[];
 }

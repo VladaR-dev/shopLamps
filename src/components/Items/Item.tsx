@@ -1,11 +1,15 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import { Context } from '../../context';
+import { useAppContext } from '../../context';
+import { ILamp } from '@/types';
 import s from './Item.module.css';
 
-export const Item = ({ lamp }) => {
-  const { setCartItems, setTotalItems, cartItems } = useContext(Context);
+interface Props {
+  lamp: ILamp;
+}
+
+export const Item = ({ lamp }: Props) => {
+  const { setCartItems, setTotalItems, cartItems } = useAppContext();
 
   const existenceItem = cartItems.find((cartItem) => cartItem.id === lamp.id);
 
@@ -26,17 +30,14 @@ export const Item = ({ lamp }) => {
           item.id === lamp.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
-      
+
       // когда товара нет
       if (!existenceItem) {
         setTotalItems((prevTotal) => prevTotal + 1);
         return [
           ...prevCartItem,
           {
-            id: lamp.id,
-            name: lamp.name,
-            price: lamp.price,
-            image: lamp.image,
+           ...lamp,
             quantity: 1,
           },
         ];
@@ -50,7 +51,7 @@ export const Item = ({ lamp }) => {
   const handleDelete = () => {
     setCartItems((prevCartItem) => {
       if (existenceItem) {
-        if (existenceItem.quantity > 1) {
+        if (existenceItem?.quantity > 1) {
           setTotalItems((prevTotal) => prevTotal - 1);
           return prevCartItem.map((item) =>
             item.id === lamp.id

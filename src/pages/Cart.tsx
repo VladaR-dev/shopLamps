@@ -3,7 +3,7 @@ import { CartItem } from '../components';
 import { useAppContext } from '../context';
 import s from './Cart.module.css';
 
-export const Cart = (): JSX.Element => {
+export const Cart = () => {
   const { cartItems, setCartItems, setLamps, lamps, setTotalItems, isAuth } =
     useAppContext();
 
