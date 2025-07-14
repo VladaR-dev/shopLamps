@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import * as lampsApi from '../api';
+import { ILamp, ICartItem, IUser } from '@/types';
 
 export const useInitApp = () => {
-  const [loading, setLoading] = useLocalStorage('loading', true);
-  const [lamps, setLamps] = useLocalStorage('lamps', []);
-  const [totalItems, setTotalItems] = useLocalStorage('totalItems', 0);
-  const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
-  const [isAuth, setIsAuth] = useLocalStorage('isAuth', false);
-  const [users, setUsers] = useLocalStorage('users', []);
+  const [loading, setLoading] = useLocalStorage<boolean>('loading', true);
+  const [lamps, setLamps] = useLocalStorage<ILamp[]>('lamps', []);
+  const [totalItems, setTotalItems] = useLocalStorage<number>('totalItems', 0);
+  const [cartItems, setCartItems] = useLocalStorage<ICartItem[]>('cartItems', []);
+  const [isAuth, setIsAuth] = useLocalStorage<boolean>('isAuth', false);
+  const [users, setUsers] = useLocalStorage<IUser[]>('users', []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -27,7 +28,7 @@ export const useInitApp = () => {
     fetchProducts();
   }, []);
 
-  const handleSetCartItems = (value) => {
+  const handleSetCartItems = (value: ICartItem[] | ((prev: ICartItem[]) => ICartItem[])) => {
     setCartItems(value);
   };
 

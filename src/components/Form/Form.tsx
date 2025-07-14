@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -6,23 +6,35 @@ import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
 import { TextField } from '../TextField';
 import { passwordValidationRules } from './passwordRules';
-import { Context } from '../../context';
+import { useAppContext } from '../../context';
 import s from './Form.module.css';
+import { IUser } from '@/types';
 
-export const Form = ({ type }) => {
-  const { setIsAuth, users: usersList, setUsers } = useContext(Context);
+interface Props {
+  type?: 'reg';
+}
+
+export const Form = ({ type }: Props) => {
+  const { setIsAuth, users: usersList, setUsers } = useAppContext();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm<IUser>({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+  });
 
   const history = useHistory();
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     const allValues = watch();
 
     const users = usersList || [];
@@ -96,7 +108,7 @@ export const Form = ({ type }) => {
         />
         <div className={s.passwordContainer}>
           <TextField
-            className={s.password}
+            // className={s.password}
             label="Password"
             name="password"
             type={showPassword ? 'text' : 'password'}

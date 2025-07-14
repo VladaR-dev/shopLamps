@@ -6,8 +6,9 @@ import lamp5 from '../static/img/lamp5.png';
 import lamp6 from '../static/img/lamp6.png';
 import lamp7 from '../static/img/lamp7.png';
 import lamp8 from '../static/img/lamp8.png';
+import { ILamp } from '../types/types';
 
-const lamps = [
+const lamps: ILamp[] = [
   {
     id: '67eefd1c-66eb-465f-825a-c8739a3ea068',
     total: 13,
@@ -82,6 +83,6 @@ const lamps = [
   },
 ];
 
-export function fetchAll() {
+export const fetchAll = (): ILamp[] => {
   return lamps;
 }

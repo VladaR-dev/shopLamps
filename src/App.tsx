@@ -6,7 +6,7 @@ import { Context } from './context';
 import { useInitApp } from './hooks';
 import './App.css';
 
-function App() {
+export const App = () => {
   const state = useInitApp();
 
   return (
@@ -39,6 +39,4 @@ function App() {
       </div>
     </Context.Provider>
   );
-}
-
-export default App;
+};

@@ -1,10 +1,14 @@
-import { useContext } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
-import { Context } from '../../context';
+import {  useAppContext } from '../../context';
 import s from './CartItem.module.css';
+import { ICartItem } from '@/types';
 
-export const CartItem = ({ item }) => {
-  const { cartItems, setCartItems, setTotalItems } = useContext(Context);
+interface Props {
+  item: ICartItem;
+}
+
+export const CartItem = ({ item }: Props) => {
+  const { cartItems, setCartItems, setTotalItems } = useAppContext();
 
   const handleDelete = () => {
     setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
@@ -26,7 +30,7 @@ export const CartItem = ({ item }) => {
             }>{`${item.quantity} x $${item.price}`}</div>
           <div className={s.someMoreInfo}>Some more information goes here</div>
         </div>
-        <FaTrashAlt onClick={handleDelete} />{' '}
+        <FaTrashAlt onClick={handleDelete} />
       </div>
     </div>
   );

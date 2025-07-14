@@ -1,16 +1,15 @@
-import { useContext, useState } from 'react';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { Context } from '../context';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppContext } from '../context';
 import s from './PageOfProducts.module.css';
 
 export const PageOfProducts = () => {
-  const params = useParams();
+  const { goodId } = useParams<{ goodId: string }>();
 
   const [valueInp, setValueInp] = useState('');
 
   const { lamps, setTotalItems, setCartItems, cartItems, loading } =
-    useContext(Context);
-  const { goodId } = params;
+    useAppContext();
 
   const lamp = lamps.find((lamp) => lamp.id === goodId);
 
@@ -101,4 +100,3 @@ export const PageOfProducts = () => {
     </div>
   );
 };
-

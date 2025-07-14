@@ -1,12 +1,11 @@
-import { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { CartItem } from '../components';
-import { Context } from '../context';
+import { useAppContext } from '../context';
 import s from './Cart.module.css';
 
-export const Cart = () => {
+export const Cart = (): JSX.Element => {
   const { cartItems, setCartItems, setLamps, lamps, setTotalItems, isAuth } =
-    useContext(Context);
+    useAppContext();
 
   const checkIsAuth = isAuth === true;
 
@@ -38,11 +37,10 @@ export const Cart = () => {
     toast.error('To make a purchase you must be logged in', {
       autoClose: 2000,
     });
-    return;
   };
 
   if (cartItems.length === 0) {
-    return 'Корзина пуста';
+    return <div className={s.cartItems}>Корзина пуста</div>;
   }
 
   return (
