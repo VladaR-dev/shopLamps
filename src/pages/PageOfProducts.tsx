@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useAppContext } from '../context';
 import s from './PageOfProducts.module.css';
 
@@ -12,6 +13,8 @@ export const PageOfProducts = () => {
     useAppContext();
 
   const lamp = lamps.find((lamp) => lamp.id === goodId);
+  const lampCart = cartItems.find((lampCart) => lampCart.id === lamp?.id);
+  console.log('valueInp', valueInp);
 
   if (!lamp) {
     return <div>Товар не найден</div>;
@@ -19,7 +22,7 @@ export const PageOfProducts = () => {
 
   const isInpValid = (input: string) => {
     const numberInput = Number(input);
-    return !isNaN(numberInput) && numberInput > 0 && numberInput <= lamp.total;
+    return !isNaN(numberInput) && numberInput > 0;
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +36,19 @@ export const PageOfProducts = () => {
 
   const handleChangeButton = () => {
     if (existenceItem && existenceItem.quantity === lamp.total) return;
+
+    if (Number(valueInp) > 13) {
+      toast.error(
+        `You cannot add more items than available. Available: ${
+          lampCart ? lamp.total - lampCart.quantity : lamp.total
+        }`,
+        {
+          autoClose: 2000,
+        }
+      );
+      return;
+    }
+
     const quantity = Number(valueInp);
 
     setCartItems((prevCartItem) => {
@@ -74,7 +90,18 @@ export const PageOfProducts = () => {
         <div className={s.filedAddRightSide}>
           <div className={s.fieldAddName}>{lamp.name}</div>
           <div className={s.fieldAddPrice}>{`$${lamp.price}`}</div>
-          <div className={s.fieldAddTotal}>{`Balance: ${lamp.total}`}</div>
+          <div className={s.quantityOfGoods}>
+            <div className={s.fieldAddTotal}>{`In stock: ${lamp.total}`}</div>
+            {lampCart ? (
+              <div className={s.fieldAddTotal}>{`Available: ${
+                lamp.total - lampCart.quantity
+              }`}</div>
+            ) : (
+              <div
+                className={s.fieldAddTotal}>{`Available: ${lamp.total}`}</div>
+            )}
+          </div>
+
           <div className={s.inputField}>
             <input
               type="text"
