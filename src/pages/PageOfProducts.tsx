@@ -14,7 +14,10 @@ export const PageOfProducts = () => {
 
   const lamp = lamps.find((lamp) => lamp.id === goodId);
   const lampCart = cartItems.find((lampCart) => lampCart.id === lamp?.id);
-  console.log('valueInp', valueInp);
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
 
   if (!lamp) {
     return <div>Товар не найден</div>;
@@ -35,21 +38,23 @@ export const PageOfProducts = () => {
   const existenceItem = cartItems.find((cartItem) => cartItem.id === goodId);
 
   const handleChangeButton = () => {
+    console.log('lampCart', lampCart);
+    const quantity = Number(valueInp);
+    const availableQuantity = lampCart
+      ? lamp.total - lampCart.quantity
+      : lamp.total;
+
     if (existenceItem && existenceItem.quantity === lamp.total) return;
 
-    if (Number(valueInp) > 13) {
+    if (quantity > availableQuantity) {
       toast.error(
-        `You cannot add more items than available. Available: ${
-          lampCart ? lamp.total - lampCart.quantity : lamp.total
-        }`,
+        `You cannot add more items than available. Available: ${availableQuantity}`,
         {
           autoClose: 2000,
         }
       );
       return;
     }
-
-    const quantity = Number(valueInp);
 
     setCartItems((prevCartItem) => {
       if (existenceItem && existenceItem.quantity < lamp.total) {
@@ -75,10 +80,6 @@ export const PageOfProducts = () => {
     });
     setValueInp('');
   };
-
-  if (loading) {
-    return <div>Loading</div>;
-  }
 
   return (
     <div className={s.pageOfGoodContainer}>
